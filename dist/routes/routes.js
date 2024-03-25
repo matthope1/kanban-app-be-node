@@ -31,4 +31,5 @@ const boardController = __importStar(require("../controllers/boardController"));
 const router = express_1.default.Router();
 router.get('/boards', boardController.getAllBoards);
 router.post('/boards', boardController.createBoard);
+router.put('/boards/:id', boardController.updateBoard);
 exports.default = router;
