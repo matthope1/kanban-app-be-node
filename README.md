@@ -3,4 +3,4 @@
 
 Database Diagram 
 
-![alt text](dbdiagram.png)
+![database structure diagram](dbdiagram.png)
