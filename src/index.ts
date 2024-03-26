@@ -15,11 +15,11 @@ const app: Express = express();
 const port = process.env.PORT || 3000;
 
 const jwtCheck = auth({
-  audience: 'https://kanbanbe.com',
+  // audience: 'https://kanbanbe.com',
+  audience: 'https://dev-8mqlgmbq3y23i00o.us.auth0.com/api/v2/',
   issuerBaseURL: 'https://dev-8mqlgmbq3y23i00o.us.auth0.com/',
   tokenSigningAlg: 'RS256'
 });
-
 
 app.use(bodyParser.urlencoded());
 
@@ -27,9 +27,7 @@ app.use(bodyParser.json());
 
 app.use(cors())
 
-// app.use(jwtCheck)
-
-app.use('/api', routes)
+app.use('/api', jwtCheck , routes)
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server");

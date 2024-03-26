@@ -1,13 +1,19 @@
 import { Request, Response } from 'express'
-
 import { Board } from '../models/board'
 import { log } from 'console'
+import { getUserInfo } from '../auth0/auth0'
 
 
 export const getAllBoards = async (req: Request, res: Response) => {
-  log("get all boards hit",req)
+  const token = req.headers.authorization || ''
+  log("get all boards hit auth = ",token)
+  console.log("token from request")
+  const userData = await getUserInfo(token)
+
   try {
-    const boards = await Board.find()
+    console.log("userData.email", userData?.email)
+    const filter = {'userEmail': userData?.email}
+    const boards = await Board.find(filter)
     log("boards", boards)
     res.json({boards})
 

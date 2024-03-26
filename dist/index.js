@@ -16,15 +16,15 @@ dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 const jwtCheck = (0, express_oauth2_jwt_bearer_1.auth)({
-    audience: 'https://kanbanbe.com',
+    // audience: 'https://kanbanbe.com',
+    audience: 'https://dev-8mqlgmbq3y23i00o.us.auth0.com/api/v2/',
     issuerBaseURL: 'https://dev-8mqlgmbq3y23i00o.us.auth0.com/',
     tokenSigningAlg: 'RS256'
 });
 app.use(body_parser_1.default.urlencoded());
 app.use(body_parser_1.default.json());
 app.use((0, cors_1.default)());
-// app.use(jwtCheck)
-app.use('/api', routes_1.default);
+app.use('/api', jwtCheck, routes_1.default);
 app.get("/", (req, res) => {
     res.send("Express + TypeScript Server");
 });

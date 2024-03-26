@@ -9,7 +9,7 @@ export const getUserInfo = async (accessToken: string) => {
 
   const config = {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `${accessToken}`,
       'Content-type': 'application/json'
     }
   };
@@ -17,9 +17,10 @@ export const getUserInfo = async (accessToken: string) => {
   try {
     const response = await axios.get(url, config);
     log("res from getting user info", response)
-
+    return response.data
   } catch (err) {
     log("err", err)
+    return false 
   }
 }
 

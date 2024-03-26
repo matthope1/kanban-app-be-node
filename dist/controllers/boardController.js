@@ -12,10 +12,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateBoard = exports.createBoard = exports.getAllBoards = void 0;
 const board_1 = require("../models/board");
 const console_1 = require("console");
+const auth0_1 = require("../auth0/auth0");
 const getAllBoards = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    (0, console_1.log)("get all boards hit", req);
+    const token = req.headers.authorization || '';
+    (0, console_1.log)("get all boards hit auth = ", token);
+    console.log("token from request");
+    const userData = yield (0, auth0_1.getUserInfo)(token);
     try {
-        const boards = yield board_1.Board.find();
+        console.log("userData.email", userData === null || userData === void 0 ? void 0 : userData.email);
+        const filter = { 'userEmail': userData === null || userData === void 0 ? void 0 : userData.email };
+        const boards = yield board_1.Board.find(filter);
         (0, console_1.log)("boards", boards);
         res.json({ boards });
     }

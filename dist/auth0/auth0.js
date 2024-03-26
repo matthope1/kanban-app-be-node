@@ -21,16 +21,18 @@ const getUserInfo = (accessToken) => __awaiter(void 0, void 0, void 0, function*
     const url = `https://${domain}/userinfo`;
     const config = {
         headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `${accessToken}`,
             'Content-type': 'application/json'
         }
     };
     try {
         const response = yield axios_1.default.get(url, config);
         (0, console_1.log)("res from getting user info", response);
+        return response.data;
     }
     catch (err) {
         (0, console_1.log)("err", err);
+        return false;
     }
 });
 exports.getUserInfo = getUserInfo;
