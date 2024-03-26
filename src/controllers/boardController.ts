@@ -5,7 +5,7 @@ import { log } from 'console'
 
 
 export const getAllBoards = async (req: Request, res: Response) => {
-  log("get all boards hit")
+  log("get all boards hit",req)
   try {
     const boards = await Board.find()
     log("boards", boards)

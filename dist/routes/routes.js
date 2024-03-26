@@ -34,4 +34,6 @@ router.get('/boards', boardController.getAllBoards);
 router.post('/boards', boardController.createBoard);
 router.put('/boards/:id', boardController.updateBoard);
 router.post('/column/:boardId', columnController.createColumn);
+router.put('/column/:columnId', columnController.updateColumn);
+router.delete('/column/:columnId', columnController.deleteColumn);
 exports.default = router;

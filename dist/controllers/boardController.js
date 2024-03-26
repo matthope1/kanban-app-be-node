@@ -13,7 +13,7 @@ exports.updateBoard = exports.createBoard = exports.getAllBoards = void 0;
 const board_1 = require("../models/board");
 const console_1 = require("console");
 const getAllBoards = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    (0, console_1.log)("get all boards hit");
+    (0, console_1.log)("get all boards hit", req);
     try {
         const boards = yield board_1.Board.find();
         (0, console_1.log)("boards", boards);

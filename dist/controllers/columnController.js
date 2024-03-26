@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createColumn = void 0;
+exports.deleteColumn = exports.updateColumn = exports.createColumn = void 0;
 const board_1 = require("../models/board");
 const console_1 = require("console");
 const createColumn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -36,3 +36,32 @@ const createColumn = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.createColumn = createColumn;
+const updateColumn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { columnId } = req.params;
+    (0, console_1.log)("update column: ", columnId);
+    const update = req.body;
+    (0, console_1.log)("update", update);
+    try {
+        const doc = yield board_1.Column.findByIdAndUpdate(columnId, update, { new: true });
+        (0, console_1.log)("updated doc", doc);
+        res.json({ message: "Successfully updated column", updated: doc });
+    }
+    catch (err) {
+        (0, console_1.log)("err", err);
+        res.status(500).json({ err });
+    }
+});
+exports.updateColumn = updateColumn;
+const deleteColumn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { columnId } = req.params;
+    (0, console_1.log)("delete column", columnId);
+    try {
+        const doc = yield board_1.Column.findByIdAndDelete(columnId);
+        (0, console_1.log)("doc after delete", doc);
+    }
+    catch (err) {
+        (0, console_1.log)("err", err);
+        res.status(500).json({ err });
+    }
+});
+exports.deleteColumn = deleteColumn;
